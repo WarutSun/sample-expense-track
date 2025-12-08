@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Expense Tracker</h1>
+            <p>Manage and monitor your spending</p>
+        </header>
+
+        <!-- Loading indicator -->
+        <div id="loading" class="loading">Loading...</div>
+
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-label">Total Expenses</div>
+                        <div class="card-value" id="totalExpenses">$0.00</div>
+                    </div>
+                    <div class="card-icon icon-blue">💵</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-label">Transactions</div>
+                        <div class="card-value" id="totalTransactions">0</div>
+                    </div>
+                    <div class="card-icon icon-green">📊</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-label">Top Category</div>
+                        <div class="card-value" id="topCategory" style="font-size: 1.3rem;">N/A</div>
+                    </div>
+                    <div class="card-icon icon-purple">📅</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-card">
+                <h3>📊 Expenses by Category (Pie Chart)</h3>
+                <div class="chart-container">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3>📊 Category Comparison (Bar Chart)</h3>
+                <div class="chart-container">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3>📈 Spending Trend (Line Chart)</h3>
+                <div class="chart-container">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <div class="form-card">
+                    <h2>➕ Add Expense</h2>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" id="description" placeholder="Enter description">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount</label>
+                        <input type="number" id="amount" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="category">
+                            <option>Food</option>
+                            <option>Transportation</option>
+                            <option>Entertainment</option>
+                            <option>Utilities</option>
+                            <option>Healthcare</option>
+                            <option>Shopping</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="date">
+                    </div>
+                    <button class="btn" onclick="addExpense()">Add Expense</button>
+                </div>
+
+                <div class="form-card">
+                    <h2>📊 Category Breakdown</h2>
+                    <div class="category-breakdown" id="categoryBreakdown">
+                        <p class="no-expenses">No expenses yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expenses-section">
+                <div class="expenses-header">
+                    <h2>🔍 Expenses</h2>
+                    <div class="filters">
+                        <select id="filterPeriod" onchange="filterExpenses()">
+                            <option value="all">All Time</option>
+                            <option value="7">Last 7 Days</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 3 Months</option>
+                        </select>
+                        <select id="sortBy" onchange="sortExpenses()">
+                            <option value="date">Sort by Date</option>
+                            <option value="amount">Sort by Amount</option>
+                            <option value="category">Sort by Category</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="expense-list" id="expenseList">
+                    <p class="no-expenses">No expenses to display</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
