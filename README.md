@@ -1,3 +1,5 @@
+![Alt text](/image.png)
+
 Simple Expense Tracker
 A beautiful and intuitive web-based expense tracking application that helps you manage and visualize your spending habits. Built with pure HTML, CSS, and JavaScript - no frameworks required!
 
@@ -59,3 +61,4 @@ expense-tracker/
 ├── style.css           # All styling and responsive design
 ├── script.js           # Application logic and chart rendering
 └── README.md           # Project documentation (this file)
+
